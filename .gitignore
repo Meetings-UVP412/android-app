@@ -1,0 +1,59 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Gradle
+.gradle/
+build/
+!src/*/build/  # если вы по какой-то причине коммитите собранные ресурсы (обычно не нужно)
+*.log
+
+# Android
+/local.properties
+/.idea/
+/.gradle/
+*.iml
+/out/
+/captures/
+/androidTestResults/
+/test-results/
+/test-output/
+
+# APKs and bundles
+/app/build/
+*/build/
+
+# Keystore
+*.jks
+*.keystore
+
+# Local configuration files
+gradle.properties
+local.defaults
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+__MACOSX
+
+# Editors and IDEs
+.vscode/
+*.swp
+*.swo
