@@ -1,4 +1,4 @@
-package com.example.meetings.data
+package com.example.meetings.data.model
 
 data class Meeting(
     val uuid: String,

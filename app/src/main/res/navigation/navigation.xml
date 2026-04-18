@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation.xml"
+    app:startDestination="@id/screen_meetings_list">
+
+    <fragment
+        android:id="@+id/screen_meetings_list"
+        android:name="com.example.meetings.presentation.fragments.MeetingsListFragment"
+        tools:layout="@layout/fragment_meetings_list">
+
+        <action
+            android:id="@+id/action_to_meeting_detail"
+            app:destination="@id/screen_meeting_detail" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/screen_meeting_detail"
+        android:name="com.example.meetings.presentation.fragments.MeetingDetailFragment"
+        tools:layout="@layout/fragment_meeting_detail">
+
+        <argument
+            android:name="meetingId"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="false"/>
+    </fragment>
+
+</navigation>
