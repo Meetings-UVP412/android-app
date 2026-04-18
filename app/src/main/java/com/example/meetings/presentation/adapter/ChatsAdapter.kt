@@ -9,7 +9,9 @@ import com.example.meetings.R
 import com.example.meetings.data.model.Chat
 import com.example.meetings.databinding.ItemChatBinding
 
-class ChatsAdapter : RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
+class ChatsAdapter(
+    private val onItemClick: (Chat) -> Unit
+) : RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
 
     private var chats = emptyList<Chat>()
 
@@ -24,13 +26,13 @@ class ChatsAdapter : RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(chats[position])
+        holder.bind(chats[position], onItemClick)
     }
 
     override fun getItemCount() = chats.size
 
     class ViewHolder(private val binding: ItemChatBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(chat: Chat) {
+        fun bind(chat: Chat, onItemClick: (Chat) -> Unit) {
             binding.tvChatTitle.text = chat.title
 
             val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
@@ -44,6 +46,10 @@ class ChatsAdapter : RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
             binding.tvChatTime.text = createdAt
 
             binding.ivChatIcon.setImageResource(R.drawable.ic_default_chat)
+
+            binding.root.setOnClickListener {
+                onItemClick(chat)
+            }
         }
     }
 }

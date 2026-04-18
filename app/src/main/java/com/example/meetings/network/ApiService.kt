@@ -14,4 +14,7 @@ interface ApiService {
 
     @GET("chats/{meetingId}")
     suspend fun getChatsByMeetingId(@Path("meetingId") meetingId: String): List<Chat>
+
+    @GET("chats/history/{chatId}")
+    suspend fun getChatHistory(@Path("chatId") chatId: String): Chat
 }

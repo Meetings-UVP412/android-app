@@ -16,4 +16,8 @@ class MeetingRepository {
     suspend fun getChatsByMeetingId(meetingId: String): List<Chat> {
         return MeetingApi.service.getChatsByMeetingId(meetingId)
     }
+
+    suspend fun getChatHistory(chatId: String): Chat {
+        return MeetingApi.service.getChatHistory(chatId)
+    }
 }

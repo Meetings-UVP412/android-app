@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.meetings.R
 import com.example.meetings.databinding.FragmentChatsListBinding
 import com.example.meetings.presentation.adapter.ChatsAdapter
 import com.example.meetings.presentation.viewmodel.MeetingChatsViewModel
@@ -43,7 +45,14 @@ class ChatsListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        chatsAdapter = ChatsAdapter()
+        chatsAdapter = ChatsAdapter { chat ->
+            findNavController().navigate(
+                R.id.action_to_chat_detail,
+                Bundle().apply {
+                    putString("chatId", chat.uuid)
+                }
+            )
+        }
         binding.rvChats.adapter = chatsAdapter
         binding.rvChats.layoutManager = LinearLayoutManager(requireContext())
     }

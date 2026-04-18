@@ -21,8 +21,24 @@
         android:name="com.example.meetings.presentation.fragments.MeetingDetailFragment"
         tools:layout="@layout/fragment_meeting_detail">
 
+        <action
+            android:id="@+id/action_to_chat_detail"
+            app:destination="@id/screen_chat_detail" />
+
         <argument
             android:name="meetingId"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="false"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/screen_chat_detail"
+        android:name="com.example.meetings.presentation.fragments.ChatDetailFragment"
+        tools:layout="@layout/fragment_chat_detail">
+
+        <argument
+            android:name="chatId"
             android:defaultValue=""
             app:argType="string"
             app:nullable="false"/>

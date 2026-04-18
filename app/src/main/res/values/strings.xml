@@ -2,4 +2,7 @@
     <string name="app_name">Meetings</string>
     <string name="chat_icon">Иконка чата</string>
     <string name="chat_arrow_right">Стрелка вправо</string>
+    <string name="send">Отправить</string>
+    <string name="user_avatar">Иконка пользователя</string>
+    <string name="model_icon">Иконка модели</string>
 </resources>
