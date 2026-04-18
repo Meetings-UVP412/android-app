@@ -1,6 +1,8 @@
 package com.example.meetings.presentation.viewmodel
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,7 +32,8 @@ class ChatDetailViewModel(
 
     private var currentStreamingCall: Call? = null
 
-    private val assistantResponseBuffer = StringBuilder()
+    // 🔥 Ключевое изменение: храним ссылку на последнее сообщение ассистента
+    private var currentAssistantMessage: Message? = null
 
     init {
         loadChat()
@@ -47,6 +50,7 @@ class ChatDetailViewModel(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
     fun sendMessage(messageText: String) {
         val userMessage = Message(role = "user", content = messageText)
         val request = SendMessageRequest(
@@ -55,45 +59,37 @@ class ChatDetailViewModel(
             message = userMessage
         )
 
-        _isStreaming.postValue(true)
+        _isStreaming.value = true
 
-        val currentChat = _chat.value?.copy() ?: return
-        val updatedMessages = currentChat.messages + userMessage
-        _chat.postValue(currentChat.copy(messages = updatedMessages))
+        val currentChat = _chat.value ?: return
 
-        assistantResponseBuffer.clear()
+        val messagesWithUser = currentChat.messages + userMessage
+
+        val assistantMessage = Message(role = "assistant", content = "")
+        val messagesWithAssistant = messagesWithUser + assistantMessage
+
+        _chat.value = currentChat.copy(messages = messagesWithAssistant)
 
         currentStreamingCall = repository.sendMessageAndStream(
             request,
             onChunkReceived = { chunk ->
                 Log.d("ViewModel", "Chunk received: [$chunk]")
-                assistantResponseBuffer.append(chunk)
 
-                /*
-                val current = _chat.value ?: return@onChunkReceived
-                val messages = current.messages.toMutableList()
-                if (messages.lastOrNull()?.role == "assistant") {
-                    messages[messages.lastIndex] = messages.last().copy(content = assistantResponseBuffer.toString())
-                } else {
-                    messages.add(Message(role = "assistant", content = assistantResponseBuffer.toString()))
+                val currentMessages = _chat.value?.messages.orEmpty().toMutableList()
+                if (currentMessages.lastOrNull()?.role == "assistant") {
+                    val lastMessage = currentMessages.removeLast()
+                    val updatedMessage = lastMessage.copy(content = lastMessage.content + chunk)
+                    currentMessages.add(updatedMessage)
+
+                    _chat.value = _chat.value?.copy(messages = currentMessages)
                 }
-                _chat.postValue(current.copy(messages = messages))
-                */
             },
             onError = { error ->
-                _isStreaming.postValue(false)
-                _error.postValue(error.message ?: "Ошибка при получении ответа")
+                _isStreaming.value = false
+                _error.value = error.message ?: "Ошибка при получении ответа"
             },
-            onComplete = onComplete@{
-                _isStreaming.postValue(false)
-
-                val finalContent = assistantResponseBuffer.toString().trim()
-                if (finalContent.isNotEmpty()) {
-                    val current = _chat.value ?: return@onComplete
-                    val messages = current.messages.toMutableList()
-                    messages.add(Message(role = "assistant", content = finalContent))
-                    _chat.postValue(current.copy(messages = messages))
-                }
+            onComplete = {
+                _isStreaming.value = false
             }
         )
     }
