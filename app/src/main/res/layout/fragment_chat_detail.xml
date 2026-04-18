@@ -14,16 +14,35 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         app:cardCornerRadius="12dp"
-        app:cardBackgroundColor="#2D2D3D">
+        app:cardBackgroundColor="@color/main_dark_blue">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Внимание! Текст транскрипции хранится на сервере 3 часа после завершения встречи, после создать новый чат или перегенерировать итоги будет невозможно"
-            android:textColor="@color/main_white"
-            android:textSize="14sp"
-            android:lineSpacingExtra="4dp"/>
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp">
+
+            <ImageView
+                android:id="@+id/ivInfoAlert"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_info"
+                android:contentDescription="@string/model_icon" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:text="@string/alert_will_be_archived"
+                android:textColor="@color/main_white"
+                android:textSize="15sp"
+                android:lineSpacingExtra="4dp" />
+
+        </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -48,7 +67,7 @@
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:src="@drawable/ic_default_chat"
-            android:contentDescription="Иконка модели"
+            android:contentDescription="@string/model_icon"
             android:layout_gravity="center_vertical"/>
 
         <EditText
@@ -61,7 +80,7 @@
             android:background="@null"
             android:textColor="@color/main_white"
             android:textColorHint="@color/hint_input"
-            android:hint="Введите сообщение..."
+            android:hint="@string/hint_enter_message"
             android:textSize="16sp"
             android:maxLines="5"
             android:inputType="textMultiLine"

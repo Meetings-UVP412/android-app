@@ -6,4 +6,12 @@
     <string name="user_avatar">Иконка пользователя</string>
     <string name="model_icon">Иконка модели</string>
     <string name="сreate_meeting">Создать встречу</string>
+    <string name="meetings">Встречи</string>
+    <string name="alert_will_be_archived">Внимание! Текст транскрипции хранится на сервере 3 часа после завершения встречи, далее создать новый чат или перегенерировать итоги будет невозможно</string>
+    <string name="hint_enter_message">Введите сообщение...</string>
+    <string name="status_icon">Status Icon</string>
+    <string name="meeting_name">Название встречи</string>
+    <string name="time">02.04 14:34</string>
+    <string name="author">Иванов С. А.</string>
+    <string name="duration">12:32</string>
 </resources>

@@ -69,9 +69,7 @@ class MeetingsListFragment : Fragment() {
         }
     }
 
-    private fun showCreateOptions() {
-        // TODO: Показать BottomSheetDialog или отдельный фрагмент с двумя кнопками
-    }
+    private fun showCreateOptions() {}
 
     override fun onDestroyView() {
         super.onDestroyView()
