@@ -10,14 +10,11 @@
         android:id="@+id/ivModelIcon"
         android:layout_width="21dp"
         android:layout_height="21dp"
-        android:src="@drawable/ic_default_chat"
+        android:layout_marginTop="24dp"
         android:contentDescription="@string/model_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"/>
+        android:src="@drawable/ic_default_chat"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvMessage"
@@ -27,7 +24,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
-        android:text="shhshdhd"
+        android:text="shhshdhdkmefkmefmkedfkmekfnkrmfkemfmkemkefnkemfkemfkemfshhshdhdkmefkmefmkedfkmekfnkrmfkemfmkemkefnkemfkemfkemfshhshdhdkmefkmefmkedfkmekfnkrmfkemfmkemkefnkemfkemfkemf"
         android:layout_marginBottom="8dp"
         android:textColor="@color/main_white"
         android:textSize="16sp"

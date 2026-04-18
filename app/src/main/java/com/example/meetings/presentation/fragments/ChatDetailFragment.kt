@@ -1,16 +1,20 @@
 package com.example.meetings.presentation.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.meetings.R
 import com.example.meetings.databinding.FragmentChatDetailBinding
 import com.example.meetings.presentation.adapter.ChatMessagesAdapter
 import com.example.meetings.presentation.viewmodel.ChatDetailViewModel
@@ -39,11 +43,24 @@ class ChatDetailFragment : Fragment() {
         setupRecyclerView()
         setupViewModel()
         setupInputField()
+
+        binding.etMessageInput.setOnClickListener {
+            requestFocusAndShowKeyboard()
+        }
+
+        binding.etMessageInput.setOnTouchListener { _, _ ->
+            requestFocusAndShowKeyboard()
+            false
+        }
     }
 
     private fun setupArguments() {
         val chatId = arguments?.getString("chatId") ?: ""
-        viewModel = ViewModelProvider(this, ChatDetailViewModelFactory(chatId)) [ChatDetailViewModel::class.java]
+        val meetingId = arguments?.getString("meetingId") ?: ""
+        viewModel = ViewModelProvider(
+            this,
+            ChatDetailViewModelFactory(chatId, meetingId)
+        )[ChatDetailViewModel::class.java]
     }
 
     private fun setupRecyclerView() {
@@ -53,6 +70,15 @@ class ChatDetailFragment : Fragment() {
     }
 
     private fun setupViewModel() {
+        viewModel.isStreaming.observe(viewLifecycleOwner) { isStreaming ->
+            binding.ivSendButton.isEnabled = !isStreaming
+            if (isStreaming) {
+                binding.ivSendButton.setImageResource(R.drawable.ic_button_sending)
+            } else {
+                binding.ivSendButton.setImageResource(R.drawable.ic_send_button)
+            }
+        }
+
         viewModel.chat.observe(viewLifecycleOwner) { chat ->
             messagesAdapter.submitList(chat.messages)
 
@@ -67,6 +93,28 @@ class ChatDetailFragment : Fragment() {
     }
 
     private fun setupInputField() {
+        binding.etMessageInput.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.rvMessages.postDelayed({
+                    binding.rvMessages.smoothScrollToPosition(messagesAdapter.itemCount - 1)
+                }, 200)
+            }
+        }
+
+        binding.etMessageInput.setOnClickListener {
+            showKeyboard()
+        }
+
+        binding.ivSendButton.setOnClickListener {
+            val messageText = binding.etMessageInput.text.toString().trim()
+            if (messageText.isNotEmpty() && !viewModel.isStreaming.value!!) {
+                Log.d("Fragment", "📤 Sending user message: [$messageText]")
+                viewModel.sendMessage(messageText)
+                binding.etMessageInput.setText("")
+            }
+        }
+
+
         binding.etMessageInput.setOnTouchListener { _, _ ->
             binding.etMessageInput.isFocusable = true
             binding.etMessageInput.isFocusableInTouchMode = true
@@ -95,6 +143,23 @@ class ChatDetailFragment : Fragment() {
 
         binding.etMessageInput.layoutParams.height = minOf(newHeight, maxHeight)
         binding.etMessageInput.requestLayout()
+    }
+
+    private fun showKeyboard() {
+        binding.etMessageInput.requestFocus()
+        binding.etMessageInput.postDelayed({
+            val imm =
+                requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(binding.etMessageInput, InputMethodManager.SHOW_IMPLICIT)
+        }, 100)
+    }
+
+    private fun requestFocusAndShowKeyboard() {
+        binding.etMessageInput.requestFocus()
+        binding.etMessageInput.postDelayed({
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(binding.etMessageInput, InputMethodManager.SHOW_IMPLICIT)
+        }, 200)
     }
 
     override fun onDestroyView() {

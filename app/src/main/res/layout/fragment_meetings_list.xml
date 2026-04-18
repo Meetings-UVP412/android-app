@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/main_dark"
-    android:layout_marginTop="75dp">
+    android:background="@color/main_dark">
 
     <Button
         android:id="@+id/btnCreateMeeting"
@@ -13,7 +12,7 @@
         android:layout_height="56dp"
         android:backgroundTint="@color/main_white"
         android:textColor="@color/main_dark_blue"
-        android:text="Создать встречу" />
+        android:text="@string/сreate_meeting" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

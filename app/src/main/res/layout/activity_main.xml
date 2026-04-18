@@ -1,42 +1,36 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:elevation="4dp">
+        android:layout_height="75dp"
+        android:background="@color/main_dark_blue"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <TextView
+            android:id="@+id/toolbar_title"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:background="@color/main_dark_blue"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center"
+            android:text="Встречи"
+            style="@style/ToolbarTitleText" />
 
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="38dp"
-                android:layout_marginEnd="8dp"
-                android:layout_gravity="center"
-                android:text="Встречи"
-                style="@style/ToolbarTitleText" />
-
-        </androidx.appcompat.widget.Toolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

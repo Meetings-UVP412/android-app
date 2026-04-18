@@ -3,6 +3,7 @@ package com.example.meetings.presentation.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.meetings.data.model.Message
 import com.example.meetings.databinding.ItemAssistantMessageBinding
@@ -13,8 +14,12 @@ class ChatMessagesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var messages = emptyList<Message>()
 
     fun submitList(newList: List<Message>) {
+        Log.d("Adapter", "submitList called with ${newList.size} messages")
+        val diffCallback = MessageDiffCallback(messages, newList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         messages = newList
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
+        Log.d("Adapter", "Adapter notified of changes")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -29,10 +34,11 @@ class ChatMessagesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d("ChatMessagesAdapter", "Binding message: ${messages[position].content}")
+        val message = messages[position]
+        Log.d("Adapter", "BindingUtil position $position: ${message.role} - [${message.content}]")
         when (holder) {
-            is UserMessageViewHolder -> holder.bind(messages[position])
-            is AssistantMessageViewHolder -> holder.bind(messages[position])
+            is UserMessageViewHolder -> holder.bind(message)
+            is AssistantMessageViewHolder -> holder.bind(message)
         }
     }
 
@@ -54,6 +60,20 @@ class ChatMessagesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class AssistantMessageViewHolder(private val binding: ItemAssistantMessageBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(message: Message) {
             binding.tvMessage.text = message.content
+        }
+    }
+
+    class MessageDiffCallback(
+        private val oldList: List<Message>,
+        private val newList: List<Message>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize() = oldList.size
+        override fun getNewListSize() = newList.size
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].role == newList[newItemPosition].role
+        }
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition] == newList[newItemPosition]
         }
     }
 }

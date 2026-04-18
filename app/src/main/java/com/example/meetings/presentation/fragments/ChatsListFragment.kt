@@ -50,6 +50,7 @@ class ChatsListFragment : Fragment() {
                 R.id.action_to_chat_detail,
                 Bundle().apply {
                     putString("chatId", chat.uuid)
+                    putString("meetingId", chat.meetingUUID)
                 }
             )
         }

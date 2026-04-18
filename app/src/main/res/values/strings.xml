@@ -5,4 +5,5 @@
     <string name="send">Отправить</string>
     <string name="user_avatar">Иконка пользователя</string>
     <string name="model_icon">Иконка модели</string>
+    <string name="сreate_meeting">Создать встречу</string>
 </resources>

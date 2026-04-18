@@ -42,6 +42,11 @@
             android:defaultValue=""
             app:argType="string"
             app:nullable="false"/>
+
+        <argument
+            android:name="meetingId"
+            android:defaultValue=""
+            app:argType="string" />
     </fragment>
 
 </navigation>
