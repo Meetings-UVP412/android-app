@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Meetings</string>
+    <string name="chat_icon">Иконка чата</string>
+    <string name="chat_arrow_right">Стрелка вправо</string>
 </resources>

@@ -17,10 +17,11 @@
 
         <ImageView
             android:id="@+id/ivChatIcon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginTop="2dp"
             android:src="@drawable/ic_default_chat"
-            android:contentDescription="Иконка чата"/>
+            android:contentDescription="@string/chat_icon"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -34,11 +35,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
+                android:text="Генератор задач"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvChatTime"
+                android:text="17.04.2026 14:43"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -48,8 +51,9 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/ic_arrow_right"
-            android:contentDescription="Стрелка вправо"/>
+            android:contentDescription="@string/chat_arrow_right"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
