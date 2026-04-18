@@ -60,6 +60,7 @@ dependencies {
 
     // OkHttp logging
     implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.okhttp)
 
     // RecyclerView
     implementation(libs.androidx.recyclerview)
