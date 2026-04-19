@@ -66,7 +66,7 @@ class MeetingDetailsFragment : Fragment() {
 
             binding.tvEndTime.text = "13:16"
 
-            binding.tvAuthor.text = "Автор встречи: ${meeting.author}"
+            binding.tvAuthor.text = meeting.author
 
             participantsAdapter.submitList(meeting.users)
         }
