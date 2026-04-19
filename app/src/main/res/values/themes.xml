@@ -1,5 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.Meetings" parent="Theme.Material3.DayNight">
         <item name="android:statusBarColor">@color/your_status_bar_color</item>
     </style>
@@ -10,6 +9,12 @@
         <item name="android:windowBackground">@drawable/dialog_background_rounded</item>
         <item name="android:windowMinWidthMajor">95%</item>
         <item name="android:windowMinWidthMinor">95%</item>
+    </style>
+
+    <style name="RoundedAlertDialogCopy" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/dialog_background_rounded</item>
+        <item name="android:windowMinWidthMajor">30%</item>
+        <item name="android:windowMinWidthMinor">30%</item>
     </style>
 
 </resources>

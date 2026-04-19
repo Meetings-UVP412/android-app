@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#2D2D3D"
         android:lineSpacingExtra="4dp"
+        android:longClickable="true"
         android:padding="12dp"
         android:radius="16dp"
         android:text="shhshdhdkmefkmefmkedfkmekfnkrmfkemfmkemkefnkemfkemfkemfshhshdhdkmefkmefmkedfkmekfnkrmfkemfmkemkefnkemfkemfkemfshhshdhdkmefkmefmkedfkmekfnkrmfkemfmkemkefnkemfkemfkemf"

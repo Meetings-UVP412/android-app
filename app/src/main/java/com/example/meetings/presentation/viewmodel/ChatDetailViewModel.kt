@@ -32,7 +32,6 @@ class ChatDetailViewModel(
 
     private var currentStreamingCall: Call? = null
 
-    // 🔥 Ключевое изменение: храним ссылку на последнее сообщение ассистента
     private var currentAssistantMessage: Message? = null
 
     init {

@@ -1,10 +1,16 @@
 package com.example.meetings.presentation.adapter
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.meetings.R
 import com.example.meetings.data.model.Message
 import com.example.meetings.databinding.ItemAssistantMessageBinding
 import com.example.meetings.databinding.ItemUserMessageBinding
@@ -60,6 +66,31 @@ class ChatMessagesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class AssistantMessageViewHolder(private val binding: ItemAssistantMessageBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(message: Message) {
             binding.tvMessage.text = message.content
+
+            binding.tvMessage.setOnLongClickListener {
+                showCopyDialog(it.context, message.content)
+                true
+            }
+        }
+
+        private fun showCopyDialog(context: Context, text: String) {
+            val dialog = AlertDialog.Builder(context, R.style.RoundedAlertDialogCopy)
+                .setItems(arrayOf("Копировать")) { _, _ ->
+                    copyToClipboard(context, text)
+                }
+                .create()
+
+            dialog.setOnShowListener {
+                dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background_rounded)
+            }
+
+            dialog.show()
+        }
+
+        private fun copyToClipboard(context: Context, text: String) {
+            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            clipboard.setPrimaryClip(ClipData.newPlainText("Сообщение", text))
+            Toast.makeText(context, "Скопировано", Toast.LENGTH_SHORT).show()
         }
     }
 
