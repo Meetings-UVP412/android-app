@@ -66,8 +66,6 @@ class MeetingsAdapter(
                 else       -> R.drawable.ic_status_archived
             }
             binding.ivMeetingStatus.setImageResource(statusIconResId)
-
-
             binding.root.setOnClickListener { onClick(meeting) }
         }
     }

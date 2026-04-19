@@ -73,6 +73,8 @@ class MeetingDetailsFragment : Fragment() {
 
             participantsAdapter.submitList(meeting.users)
 
+            binding.tvParticipantsTitle.text = "Участники (${meeting.users.size})"
+
             when (meeting.status.lowercase()) {
                 "processed" -> {
                     binding.tvStatus.setText(R.string.meeting_processed)
