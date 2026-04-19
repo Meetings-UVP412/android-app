@@ -68,4 +68,6 @@ dependencies {
     implementation(libs.circleimageview)
 
     implementation(libs.androidx.media)
+
+    implementation(libs.androidx.swiperefreshlayout)
 }

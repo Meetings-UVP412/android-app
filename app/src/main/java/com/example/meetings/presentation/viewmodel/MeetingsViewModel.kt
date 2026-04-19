@@ -18,17 +18,23 @@ class MeetingsViewModel : ViewModel() {
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     init {
         loadMeetings()
     }
 
-    private fun loadMeetings() {
+    fun loadMeetings() {
         viewModelScope.launch {
+            _isLoading.value = true
             try {
                 val data = repository.fetchMeetings()
                 _meetings.postValue(data)
             } catch (e: Exception) {
                 _error.postValue(e.message ?: "Неизвестная ошибка")
+            } finally {
+                _isLoading.value = false
             }
         }
     }

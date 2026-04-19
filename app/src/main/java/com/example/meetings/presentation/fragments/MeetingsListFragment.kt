@@ -46,6 +46,17 @@ class MeetingsListFragment : Fragment() {
         setupRecyclerView()
         setupViewModel()
         setupClicks()
+        setupSwipeToRefresh()
+    }
+
+    private fun setupSwipeToRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.loadMeetings()
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.swipeRefreshLayout.isRefreshing = isLoading
+        }
     }
 
     private fun setupRecyclerView() {
