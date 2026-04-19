@@ -120,7 +120,7 @@ class MeetingsListFragment : Fragment() {
             .setAdapter(adapter) { _, which ->
                 when (which) {
                     0 -> Toast.makeText(requireContext(), "Создание встречи!", Toast.LENGTH_LONG).show()
-                    1 -> Toast.makeText(requireContext(), "Загрузка аудио встречи!", Toast.LENGTH_LONG).show()
+                    1 -> findNavController().navigate(R.id.screen_upload_audio)
                 }
             }
             .create()

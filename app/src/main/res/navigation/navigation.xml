@@ -49,4 +49,9 @@
             app:argType="string" />
     </fragment>
 
+    <fragment
+        android:id="@+id/screen_upload_audio"
+        android:name="com.example.meetings.presentation.fragments.UploadAudioFragment"
+        tools:layout="@layout/fragment_upload_audio" />
+
 </navigation>

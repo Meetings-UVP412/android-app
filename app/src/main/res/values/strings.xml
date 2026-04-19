@@ -28,4 +28,12 @@
     <string name="link">Ссылка</string>
     <string name="meeting_author">Автор встречи:</string>
     <string name="title_meeting_history">История встреч</string>
+    <string name="title_upload_file">Загрузить аудио встречи</string>
+    <string name="date">30 окт. 2023 г. 12:00</string>
+    <string name="waveform">waveform</string>
+    <string name="delete_audio">delete_audio</string>
+    <string name="clear_date_time">clear_date_time</string>
+    <string name="btn_create_meeting">Создать встречу</string>
+    <string name="upload_audio">Загрузить аудио-файл</string>
+    <string name="select_date_time">Выберите дату и время</string>
 </resources>
