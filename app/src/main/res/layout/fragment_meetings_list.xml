@@ -23,7 +23,6 @@
         app:iconTint="@color/main_dark_blue"
         app:cornerRadius="12dp"/>
 
-
     <TextView
         android:id="@+id/tv_meeting_history_title"
         android:layout_width="wrap_content"

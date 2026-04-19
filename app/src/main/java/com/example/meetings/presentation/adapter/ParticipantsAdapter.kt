@@ -28,9 +28,8 @@ class ParticipantsAdapter : RecyclerView.Adapter<ParticipantsAdapter.ViewHolder>
 
     class ViewHolder(private val binding: ItemParticipantBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
-            binding.tvUserName.text = "${user.firstName} ${user.lastName[0]}."
+            binding.tvUserName.text = user.firstName + "\n" + user.patronymic
             binding.tvUserName.setOnClickListener {
-                // добавить клик на юзера
             }
         }
     }
