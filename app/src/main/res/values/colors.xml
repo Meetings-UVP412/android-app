@@ -9,4 +9,8 @@
     <color name="hint_input">#ADBACC</color>
     <color name="meeting_hint">#94A0B2</color>
     <color name="tab_grey">#64748B</color>
+    <color name="status_processed">#A0CBD3</color>
+    <color name="status_archived">#A0CBD3</color>
+    <color name="status_end">#A0CBD3</color>
+    v<color name="status_new">#A0CBD3</color>
 </resources>
