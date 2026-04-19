@@ -55,11 +55,11 @@
         android:layout_marginBottom="8dp"
         android:paddingHorizontal="8dp" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/llInput"
         android:layout_width="match_parent"
-        android:layout_height="63dp"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:minHeight="63dp"
         android:padding="8dp"
         android:background="@color/main_dark_blue">
 
@@ -69,37 +69,42 @@
             android:layout_height="23dp"
             android:src="@drawable/ic_default_chat"
             android:contentDescription="@string/model_icon"
-            android:layout_gravity="center_vertical"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/wrapWaverForm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/main_white"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp"
-            android:padding="12dp"
-            android:layout_weight="1"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="2dp"
-            android:visibility="visible">
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/main_white"
+            app:layout_constraintStart_toEndOf="@id/ivModelIcon"
+            app:layout_constraintEnd_toStartOf="@id/ivSendButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <EditText
-            android:id="@+id/etMessageInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="10dp"
-            android:padding="12dp"
-            android:background="@color/main_white"
-            android:textColor="@color/main_dark"
-            android:textColorHint="@color/hint_input"
-            android:hint="@string/hint_enter_message"
-            android:textSize="16sp"
-            android:maxLines="5"
-            android:inputType="textMultiLine"
-            android:focusable="true"
-            android:focusableInTouchMode="true"/>
+            <EditText
+                android:id="@+id/etMessageInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="1"
+                android:maxLines="5"
+                android:inputType="textMultiLine"
+                android:gravity="top|start"
+                android:padding="12dp"
+                android:textColor="@color/main_dark"
+                android:textColorHint="@color/hint_input"
+                android:hint="@string/hint_enter_message"
+                android:textSize="16sp"
+                android:background="@null"
+                android:scrollbars="vertical"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -109,9 +114,13 @@
             android:layout_height="40dp"
             android:src="@drawable/ic_send_button"
             android:contentDescription="@string/send"
-            android:layout_gravity="center_vertical"
             android:padding="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
-    </LinearLayout>
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
