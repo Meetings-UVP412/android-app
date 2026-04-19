@@ -216,22 +216,38 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
-                    <ImageButton
-                        android:id="@+id/btnDeleteAudio"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="@null"
-                        android:src="@drawable/ic_delete"
-                        android:contentDescription="@string/delete_audio"
-                        android:visibility="gone"/>
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/wrapWaverForm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:backgroundTint="@color/main_white"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="2dp"
+                        android:visibility="gone">
 
                     <ImageView
                         android:id="@+id/ivWaveform"
-                        android:layout_width="32dp"
+                        android:layout_width="300dp"
                         android:layout_height="32dp"
-                        android:backgroundTint="@color/main_dark"
-                        android:src="@drawable/cisco"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_wave"
                         android:contentDescription="@string/waveform"
+                        android:visibility="gone"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <ImageButton
+                        android:id="@+id/btnDeleteAudio"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:backgroundTint="@color/red_icon_delete"
+                        android:background="@drawable/bg_tag_processed"
+                        android:src="@drawable/ic_delete"
+                        android:contentDescription="@string/delete_audio"
                         android:visibility="gone"/>
 
                     <com.google.android.material.button.MaterialButton
@@ -253,7 +269,8 @@
                         app:iconPadding="8dp"
                         app:iconGravity="textStart"
                         app:iconTint="@color/main_dark_blue"
-                        app:cornerRadius="12dp"/>
+                        app:cornerRadius="12dp"
+                        android:visibility="visible" />
                 </LinearLayout>
 
             </LinearLayout>

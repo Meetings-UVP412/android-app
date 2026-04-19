@@ -12,5 +12,7 @@
     <color name="status_processed">#A0CBD3</color>
     <color name="status_archived">#1F364D</color>
     <color name="status_end">#C8A7F1</color>
-    v<color name="status_new">#0099FA</color>
+    <color name="status_new">#0099FA</color>
+    <color name="delete_icon">#FFDBDB</color>
+    <color name="red_icon_delete">#FF4B49</color>
 </resources>

@@ -104,11 +104,6 @@ class UploadAudioViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun createMeeting() {
-        if (!_isCreateButtonEnabled.value!!) {
-            _error.value = "Заполните все обязательные поля"
-            return
-        }
-
         viewModelScope.launch {
             try {
                 val meeting = repository.createMeeting(

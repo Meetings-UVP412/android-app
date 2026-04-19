@@ -114,6 +114,7 @@ class UploadAudioFragment : Fragment() {
 
         viewModel.isAudioFileSelected.observe(viewLifecycleOwner) { isSelected ->
             binding.ivWaveform.visibility = if (isSelected) View.VISIBLE else View.GONE
+            binding.wrapWaverForm.visibility = if (isSelected) View.VISIBLE else View.GONE
             binding.btnDeleteAudio.visibility = if (isSelected) View.VISIBLE else View.GONE
             binding.btnUploadAudio.visibility = if (isSelected) View.GONE else View.VISIBLE
         }
@@ -125,9 +126,11 @@ class UploadAudioFragment : Fragment() {
         viewModel.isCreateButtonEnabled.observe(viewLifecycleOwner) {
             binding.btnCreateMeeting.isEnabled = it
         }
-        viewModel.error.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+
+        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
         }
+
         viewModel.success.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.screen_meetings_list)
         }
@@ -137,8 +140,13 @@ class UploadAudioFragment : Fragment() {
         binding.tvDateTime.setOnClickListener { showDateTimePicker() }
         binding.btnUploadAudio.setOnClickListener { openFilePicker() }
         binding.btnDeleteAudio.setOnClickListener { viewModel.clearAudioFile() }
+
         binding.btnCreateMeeting.setOnClickListener {
-            viewModel.createMeeting()
+            if (!viewModel.isCreateButtonEnabled.value!!) {
+                Toast.makeText(requireContext(), "Заполните все обязательные поля", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.createMeeting()
+            }
         }
     }
 
@@ -209,6 +217,7 @@ class UploadAudioFragment : Fragment() {
 
                 withContext(Dispatchers.Main) {
                     binding.ivWaveform.visibility = View.VISIBLE
+                    binding.wrapWaverForm.visibility = View.VISIBLE
                     binding.btnDeleteAudio.visibility = View.VISIBLE
                     binding.btnUploadAudio.visibility = View.GONE
                 }
@@ -222,6 +231,7 @@ class UploadAudioFragment : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
                     binding.ivWaveform.visibility = View.VISIBLE
+                    binding.wrapWaverForm.visibility = View.VISIBLE
                     binding.btnDeleteAudio.visibility = View.VISIBLE
                     binding.btnUploadAudio.visibility = View.GONE
                 }
