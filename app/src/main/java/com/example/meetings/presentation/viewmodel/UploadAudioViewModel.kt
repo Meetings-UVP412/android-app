@@ -4,19 +4,30 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.meetings.data.repository.MeetingRepository
 import com.example.meetings.network.MeetingCreateRequest
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class UploadAudioViewModel(application: Application) : AndroidViewModel(application) {
     private val _meetingName = MutableLiveData<String>()
     val meetingName: LiveData<String> = _meetingName
 
-    private val _meetingTime = MutableLiveData<String>()
+    private val _meetingTime = MutableLiveData<String>(getCurrentDateTime())
     val meetingTime: LiveData<String> = _meetingTime
+
+    companion object {
+        fun getCurrentDateTime(): String {
+            return SimpleDateFormat("dd MMM. yyyy г. HH:mm", Locale.getDefault()).format(Date())
+        }
+    }
 
     private val _link = MutableLiveData<String>()
     val link: LiveData<String> = _link
@@ -83,7 +94,7 @@ class UploadAudioViewModel(application: Application) : AndroidViewModel(applicat
     private fun updateButtonState() {
         val isNameValid = _meetingName.value?.isNotEmpty() == true
         val isAudioValid = _audioFile.value != null
-        val isTimeValid = _meetingTime.value?.isNotEmpty() == true
+        val isTimeValid = true
         val enabled = isNameValid && isAudioValid && isTimeValid
         Log.d("ButtonState", "Name:$isNameValid Audio:$isAudioValid Time:$isTimeValid -> Enabled:$enabled")
 

@@ -102,18 +102,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/date"
                         android:textColor="@color/main_white"
                         android:fontFamily="@font/roboto_medium"
                         android:textSize="17sp"/>
-
-                    <ImageButton
-                        android:id="@+id/btnClearDateTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:src="@drawable/ic_close"
-                        android:contentDescription="@string/clear_date_time"/>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

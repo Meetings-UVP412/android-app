@@ -90,18 +90,21 @@ class UploadAudioFragment : Fragment() {
         viewModel.meetingName.observe(viewLifecycleOwner) {
             binding.etMeetingName.removeTextChangedListener(meetingNameWatcher)
             binding.etMeetingName.setText(it)
+            binding.etMeetingName.setSelection(binding.etMeetingName.text.length)
             binding.etMeetingName.addTextChangedListener(meetingNameWatcher)
         }
 
         viewModel.link.observe(viewLifecycleOwner) {
             binding.etLink.removeTextChangedListener(linkWatcher)
             binding.etLink.setText(it)
+            binding.etLink.setSelection(binding.etLink.text.length)
             binding.etLink.addTextChangedListener(linkWatcher)
         }
 
         viewModel.comment.observe(viewLifecycleOwner) {
             binding.etComment.removeTextChangedListener(commentWatcher)
             binding.etComment.setText(it)
+            binding.etComment.setSelection(binding.etComment.text.length)
             binding.etComment.addTextChangedListener(commentWatcher)
         }
 
@@ -109,6 +112,10 @@ class UploadAudioFragment : Fragment() {
             binding.ivWaveform.visibility = if (isSelected) View.VISIBLE else View.GONE
             binding.btnDeleteAudio.visibility = if (isSelected) View.VISIBLE else View.GONE
             binding.btnUploadAudio.visibility = if (isSelected) View.GONE else View.VISIBLE
+        }
+
+        viewModel.meetingTime.observe(viewLifecycleOwner) { time ->
+            binding.tvDateTime.text = time
         }
 
         viewModel.isCreateButtonEnabled.observe(viewLifecycleOwner) {
@@ -124,7 +131,6 @@ class UploadAudioFragment : Fragment() {
 
     private fun setupClickListeners() {
         binding.tvDateTime.setOnClickListener { showDateTimePicker() }
-        binding.btnClearDateTime.setOnClickListener { clearDateTime() }
         binding.btnUploadAudio.setOnClickListener { openFilePicker() }
         binding.btnDeleteAudio.setOnClickListener { viewModel.clearAudioFile() }
         binding.btnCreateMeeting.setOnClickListener {
@@ -157,12 +163,6 @@ class UploadAudioFragment : Fragment() {
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         dateDialog.show()
-    }
-
-    private fun clearDateTime() {
-        selectedDateTime = ""
-        viewModel.setMeetingTime("")
-        binding.tvDateTime.text = getString(R.string.select_date_time)
     }
 
     private fun openFilePicker() {
