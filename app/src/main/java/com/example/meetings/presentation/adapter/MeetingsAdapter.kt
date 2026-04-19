@@ -11,13 +11,16 @@ import java.util.Date
 import java.util.Locale
 
 class MeetingsAdapter(
-    private val onItemClick: (Meeting) -> Unit) : RecyclerView.Adapter<MeetingsAdapter.ViewHolder>() {
+    private val onItemClick: (Meeting) -> Unit,
+    private val onListSizeChanged: (Int) -> Unit
+) : RecyclerView.Adapter<MeetingsAdapter.ViewHolder>() {
 
     private var meetings = listOf<Meeting>()
 
     fun submitList(newList: List<Meeting>) {
         meetings = newList
         notifyDataSetChanged()
+        onListSizeChanged(meetings.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -49,14 +49,20 @@ class MeetingsListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = MeetingsAdapter { meeting ->
-            findNavController().navigate(
-                R.id.action_to_meeting_detail,
-                Bundle().apply {
-                    putString("meetingId", meeting.uuid)
-                }
-            )
-        }
+        adapter = MeetingsAdapter(
+            onItemClick = { meeting ->
+                findNavController().navigate(
+                    R.id.action_to_meeting_detail,
+                    Bundle().apply {
+                        putString("meetingId", meeting.uuid)
+                    }
+                )
+            },
+            onListSizeChanged = { count ->
+                val toolbarTitle = requireActivity().findViewById<TextView>(R.id.tv_meeting_history_title)
+                toolbarTitle.text = "История встреч ($count)"
+            }
+        )
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }

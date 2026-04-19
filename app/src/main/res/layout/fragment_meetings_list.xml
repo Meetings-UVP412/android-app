@@ -1,19 +1,42 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/main_dark">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCreateMeeting"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="16dp"
         android:layout_height="56dp"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="@color/main_white"
+        android:text="@string/сreate_meeting"
+        app:icon="@drawable/ic_plus"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
         android:textColor="@color/main_dark_blue"
-        android:text="@string/сreate_meeting" />
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_medium"
+        android:backgroundTint="@color/main_white"
+        app:iconPadding="8dp"
+        app:iconGravity="textStart"
+        app:iconTint="@color/main_dark_blue"
+        app:cornerRadius="12dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_meeting_history_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_meeting_history"
+        android:textSize="18sp"
+        android:textColor="@color/main_white"
+        android:fontFamily="@font/roboto_medium"
+        android:textFontWeight="700"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="5dp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

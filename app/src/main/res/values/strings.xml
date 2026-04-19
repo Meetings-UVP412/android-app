@@ -27,4 +27,5 @@
     <string name="comment">Комментарий</string>
     <string name="link">Ссылка</string>
     <string name="meeting_author">Автор встречи:</string>
+    <string name="title_meeting_history">История встреч</string>
 </resources>
