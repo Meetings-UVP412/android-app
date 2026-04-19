@@ -12,7 +12,8 @@
         android:id="@+id/cvAlert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="0dp"
         app:cardCornerRadius="12dp"
         app:cardBackgroundColor="@color/main_dark_blue">
 
@@ -38,7 +39,7 @@
                 android:layout_marginStart="12dp"
                 android:text="@string/alert_will_be_archived"
                 android:textColor="@color/main_white"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:lineSpacingExtra="4dp" />
 
         </LinearLayout>
@@ -57,7 +58,7 @@
     <LinearLayout
         android:id="@+id/llInput"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="63dp"
         android:orientation="horizontal"
         android:padding="8dp"
         android:background="@color/main_dark_blue">
@@ -70,15 +71,28 @@
             android:contentDescription="@string/model_icon"
             android:layout_gravity="center_vertical"/>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/wrapWaverForm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/main_white"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            android:padding="12dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="2dp"
+            android:visibility="visible">
+
         <EditText
             android:id="@+id/etMessageInput"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginHorizontal="10dp"
             android:padding="12dp"
-            android:background="@null"
-            android:textColor="@color/main_white"
+            android:background="@color/main_white"
+            android:textColor="@color/main_dark"
             android:textColorHint="@color/hint_input"
             android:hint="@string/hint_enter_message"
             android:textSize="16sp"
@@ -86,6 +100,8 @@
             android:inputType="textMultiLine"
             android:focusable="true"
             android:focusableInTouchMode="true"/>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <ImageView
             android:id="@+id/ivSendButton"
