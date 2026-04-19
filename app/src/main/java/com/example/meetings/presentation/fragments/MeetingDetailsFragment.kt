@@ -1,13 +1,16 @@
 package com.example.meetings.presentation.fragments
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import com.example.meetings.presentation.viewmodel.MeetingDetailViewModelFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.meetings.R
 import com.example.meetings.databinding.FragmentMeetingDetailsBinding
 import com.example.meetings.presentation.adapter.ParticipantsAdapter
 import com.example.meetings.presentation.viewmodel.MeetingDetailViewModel
@@ -69,6 +72,40 @@ class MeetingDetailsFragment : Fragment() {
             binding.tvAuthor.text = meeting.author
 
             participantsAdapter.submitList(meeting.users)
+
+            when (meeting.status.lowercase()) {
+                "processed" -> {
+                    binding.tvStatus.setText(R.string.meeting_processed)
+                    binding.tvStatus.backgroundTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(requireContext(), R.color.status_processed)
+                    )
+                }
+                "archived" -> {
+                    binding.tvStatus.setText(R.string.meeting_archived)
+                    binding.tvStatus.backgroundTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(requireContext(), R.color.status_archived)
+                    )
+                }
+                "end" -> {
+                    binding.tvStatus.setText(R.string.meeting_end)
+                    binding.tvStatus.backgroundTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(requireContext(), R.color.status_end)
+                    )
+                }
+                "new" -> {
+                    binding.tvStatus.setText(R.string.meeting_new)
+                    binding.tvStatus.backgroundTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(requireContext(), R.color.status_new)
+                    )
+                }
+                else -> {
+                    binding.tvStatus.text = meeting.status.replaceFirstChar { it.uppercase() }
+                    binding.tvStatus.backgroundTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(requireContext(), R.color.status_archived)
+                    )
+                }
+            }
+
         }
 
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->

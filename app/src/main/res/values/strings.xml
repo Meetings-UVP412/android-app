@@ -18,6 +18,9 @@
     <string name="chat_name">Генератор задач</string>
     <string name="chat_dt_create">17.04.2026 14:43</string>
     <string name="meeting_processed">Обработана</string>
+    <string name="meeting_archived">Архивирована</string>
+    <string name="meeting_end">Закончена</string>
+    <string name="meeting_new">Новая</string>
     <string name="start_time">Начало:</string>
     <string name="end_time">Окончание:</string>
     <string name="participants">Участники (12)</string>
