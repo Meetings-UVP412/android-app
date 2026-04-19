@@ -1,13 +1,21 @@
 package com.example.meetings.presentation.fragments
 
+import android.graphics.PorterDuff
 import com.example.meetings.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,7 +77,60 @@ class MeetingsListFragment : Fragment() {
         }
     }
 
-    private fun showCreateOptions() {}
+    private fun showCreateOptions() {
+        val options = arrayOf(
+            "Создать новую встречу",
+            "Загрузить аудио встречи"
+        )
+
+        val icons = intArrayOf(
+            R.drawable.ic_create_meeting,
+            R.drawable.ic_upload_chunk
+        )
+
+        val iconTint = ContextCompat.getColor(requireContext(), R.color.main_white)
+
+        val adapter = object : BaseAdapter() {
+            override fun getCount() = options.size
+            override fun getItem(position: Int) = options[position]
+            override fun getItemId(position: Int) = position.toLong()
+
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = convertView ?: LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_alert_dialog, parent, false)
+
+                val text = view.findViewById<TextView>(R.id.text)
+                val icon = view.findViewById<ImageView>(R.id.icon)
+
+                text.text = options[position]
+                icon.setImageResource(icons[position])
+                icon.setColorFilter(iconTint, PorterDuff.Mode.SRC_IN)
+
+                return view
+            }
+        }
+
+        val dialog = AlertDialog.Builder(requireContext(), R.style.RoundedAlertDialog)
+            .setAdapter(adapter) { _, which ->
+                when (which) {
+                    0 -> Toast.makeText(requireContext(), "Создание встречи!", Toast.LENGTH_LONG).show()
+                    1 -> Toast.makeText(requireContext(), "Загрузка аудио встречи!", Toast.LENGTH_LONG).show()
+                }
+            }
+            .create()
+
+        dialog.setOnShowListener {
+            dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background_rounded)
+
+            try {
+                val dividerId = resources.getIdentifier("titleDivider", "id", "android")
+                val divider = dialog.findViewById<View>(dividerId)
+                divider?.visibility = View.GONE
+            } catch (_: Exception) {
+            }
+        }
+        dialog.show()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

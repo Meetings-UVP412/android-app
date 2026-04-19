@@ -8,4 +8,5 @@
     <color name="main_dark">#122532</color>
     <color name="hint_input">#ADBACC</color>
     <color name="meeting_hint">#94A0B2</color>
+    <color name="tab_grey">#64748B</color>
 </resources>
