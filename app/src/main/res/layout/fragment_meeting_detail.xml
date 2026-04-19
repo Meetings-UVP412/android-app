@@ -4,18 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/main_dark">
 
 
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggleGroup"
+    <LinearLayout
+        android:id="@+id/tabContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        app:singleSelection="true"
-        app:selectionRequired="true"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp"
+        android:padding="15dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,31 +23,49 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDetails"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:text=""
-            app:icon="@drawable/ic_meeting_details"
-            app:iconTint="@color/main_white" />
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:background="@drawable/bg_tab_left_inactive"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:backgroundTint="@null"
+            app:iconSize="22dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/main_white"
+            app:icon="@drawable/ic_meeting_details" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnChat"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:text=""
-            app:icon="@drawable/ic_meeting_chats"
-            app:iconTint="@color/tab_grey" />
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:backgroundTint="@null"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:background="@drawable/bg_tab_right_inactive"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="22dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/main_white"
+            app:icon="@drawable/ic_meeting_chats" />
 
-    </com.google.android.material.button.MaterialButtonToggleGroup>
+    </LinearLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/toggleGroup"
+        app:layout_constraintTop_toBottomOf="@id/tabContainer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

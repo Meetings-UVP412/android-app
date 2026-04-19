@@ -38,49 +38,33 @@ class MeetingDetailFragment : Fragment() {
         val adapter = MeetingDetailPagerAdapter(meetingId, this)
         binding.viewPager.adapter = adapter
 
-        binding.toggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
-            if (isChecked) {
-                when (checkedId) {
-                    R.id.btnDetails -> {
-                        binding.viewPager.currentItem = 0
-                        updateIcons(false, true)
-                    }
-                    R.id.btnChat -> {
-                        binding.viewPager.currentItem = 1
-                        updateIcons(true, false)
-                    }
-                }
-            }
-        }
+        binding.btnDetails.setOnClickListener { switchTab(0) }
+        binding.btnChat.setOnClickListener { switchTab(1) }
 
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                when (position) {
-                    0 -> {
-                        binding.toggleGroup.check(R.id.btnDetails)
-                        updateIcons(false, true)
-                    }
-                    1 -> {
-                        binding.toggleGroup.check(R.id.btnChat)
-                        updateIcons(true, false)
-                    }
-                }
+                switchTab(position)
             }
         })
 
-        updateIcons(false, true)
-
+        switchTab(0)
     }
 
-    private fun updateIcons(isChatActive: Boolean, isDetailsActive: Boolean) {
-        binding.btnDetails.iconTint =
-            ContextCompat.getColorStateList(requireContext(),
-                if (isDetailsActive) R.color.main_dark else R.color.main_dark_blue)
+    private fun switchTab(position: Int) {
+        binding.viewPager.currentItem = position
+        if (position == 0) {
+            binding.btnDetails.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_tab_left_active)
+            binding.btnDetails.setIconTintResource(R.color.main_white)
+            binding.btnChat.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_tab_right_inactive)
+            binding.btnChat.setIconTintResource(R.color.tab_grey)
 
-        binding.btnChat.iconTint =
-            ContextCompat.getColorStateList(requireContext(),
-                if (isChatActive) R.color.main_dark else R.color.main_dark_blue)
+        } else {
+            binding.btnChat.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_tab_right_active)
+            binding.btnChat.setIconTintResource(R.color.main_white)
+            binding.btnDetails.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_tab_left_inactive)
+            binding.btnDetails.setIconTintResource(R.color.tab_grey)
+        }
     }
 
     override fun onDestroyView() {
