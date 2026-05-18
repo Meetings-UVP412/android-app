@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -31,6 +32,8 @@ class RecordingFragment : Fragment() {
     private lateinit var meetingId: String
     private var chunkOrder = 1
 
+    private lateinit var recordingDot: ImageView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,6 +51,8 @@ class RecordingFragment : Fragment() {
         requireActivity().findViewById<TextView>(R.id.toolbar_title)?.text = meetingName
 
         setupButtons()
+        recordingDot = binding.ivRecordingDot
+        updateRecordingDot()
     }
 
     private fun setupButtons() {
@@ -92,6 +97,7 @@ class RecordingFragment : Fragment() {
         }
 
         isRecording = true
+        updateRecordingDot()
         binding.btnRecord.setImageResource(R.drawable.ic_stop)
         binding.waveform.visibility = View.VISIBLE
 
@@ -112,6 +118,7 @@ class RecordingFragment : Fragment() {
 
     private fun stopRecording() {
         isRecording = false
+        updateRecordingDot()
         binding.btnRecord.setImageResource(R.drawable.ic_record)
         binding.waveform.visibility = View.GONE
         timer?.cancel()
@@ -181,5 +188,10 @@ class RecordingFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun updateRecordingDot() {
+        val icon = if (isRecording) R.drawable.ic_dot_recording else R.drawable.ic_dot_idle
+        recordingDot.setImageResource(icon)
     }
 }
