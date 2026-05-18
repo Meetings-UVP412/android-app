@@ -6,16 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -130,7 +126,7 @@ class MeetingsListFragment : Fragment() {
         val dialog = AlertDialog.Builder(requireContext(), R.style.RoundedAlertDialog)
             .setAdapter(adapter) { _, which ->
                 when (which) {
-                    0 -> Toast.makeText(requireContext(), "Создание встречи!", Toast.LENGTH_LONG).show()
+                    0 -> findNavController().navigate(R.id.screen_create_meeting)
                     1 -> findNavController().navigate(R.id.screen_upload_audio)
                 }
             }

@@ -11,7 +11,6 @@ import com.example.meetings.network.MeetingApi
 import com.example.meetings.network.MeetingCreateRequest
 import com.example.meetings.network.SseClient
 import okhttp3.Call
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

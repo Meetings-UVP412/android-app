@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meetings.data.model.Meeting
 import com.example.meetings.data.repository.MeetingRepository
+import com.example.meetings.network.MeetingCreateRequest
 import kotlinx.coroutines.launch
 
 class MeetingsViewModel : ViewModel() {
@@ -37,5 +38,9 @@ class MeetingsViewModel : ViewModel() {
                 _isLoading.value = false
             }
         }
+    }
+
+    suspend fun createMeeting(request: MeetingCreateRequest): Meeting {
+        return repository.createMeeting(request)
     }
 }

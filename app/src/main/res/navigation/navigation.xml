@@ -54,4 +54,29 @@
         android:name="com.example.meetings.presentation.fragments.UploadAudioFragment"
         tools:layout="@layout/fragment_upload_audio" />
 
+    <fragment
+        android:id="@+id/screen_create_meeting"
+        android:name="com.example.meetings.presentation.fragments.CreateMeetingFragment"
+        tools:layout="@layout/fragment_create_meeting">
+
+        <action
+            android:id="@+id/action_to_recording"
+            app:destination="@id/screen_recording" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/screen_recording"
+        android:name="com.example.meetings.presentation.fragments.RecordingFragment"
+        tools:layout="@layout/fragment_recording">
+
+        <argument
+            android:name="meetingId"
+            app:argType="string" />
+        <argument
+            android:name="meetingName"
+            app:argType="string" />
+
+    </fragment>
+
 </navigation>
