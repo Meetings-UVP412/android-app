@@ -126,6 +126,10 @@ class RecordingFragment : Fragment() {
         }
         requireContext().startService(intent)
 
+        val result = Bundle().apply {
+            putBoolean("meeting_finished", true)
+        }
+        parentFragmentManager.setFragmentResult("meeting_request_key", result)
         findNavController().popBackStack(R.id.screen_meetings_list, false)
     }
 

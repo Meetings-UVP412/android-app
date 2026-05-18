@@ -36,6 +36,12 @@ class MeetingsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        parentFragmentManager.setFragmentResultListener("meeting_request_key", viewLifecycleOwner) { _, bundle ->
+            if (bundle.getBoolean("meeting_finished", false)) {
+                viewModel.loadMeetings()
+            }
+        }
+
         val toolbarTitle = requireActivity().findViewById<TextView>(R.id.toolbar_title)
         toolbarTitle.text = "Встречи"
 
