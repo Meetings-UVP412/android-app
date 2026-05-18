@@ -64,7 +64,7 @@
             android:text="@string/time"
             android:fontFamily="@font/roboto_medium"
             android:textColor="@color/meeting_hint"
-            android:textSize="15sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/ivEventDate"
             app:layout_constraintTop_toTopOf="@id/ivEventDate"
             app:layout_constraintBottom_toBottomOf="@id/ivEventDate" />
@@ -77,7 +77,7 @@
             android:text="@string/author"
             android:fontFamily="@font/roboto_medium"
             android:textColor="@color/meeting_hint"
-            android:textSize="15sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/tvDate"
             app:layout_constraintTop_toTopOf="@id/ivEventDate"
             app:layout_constraintBottom_toBottomOf="@id/ivEventDate" />
@@ -93,8 +93,8 @@
             app:layout_constraintBottom_toBottomOf="@id/ivEventDate">
 
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginTop="1dp"
                 app:srcCompat="@drawable/ic_duration" />
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/duration"
                 android:textColor="@color/main_white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

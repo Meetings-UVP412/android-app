@@ -54,9 +54,10 @@ class MeetingsAdapter(
 
             binding.tvAuthor.text = meeting.author
 
-            val minutes = meeting.duration / 60
+            val hours = meeting.duration / 3600
+            val minutes = (meeting.duration % 3600) / 60
             val seconds = meeting.duration % 60
-            binding.tvDuration.text = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds)
+            binding.tvDuration.text = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds)
 
             val statusIconResId = when (meeting.status.uppercase()) {
                 "ARCHIVED" -> R.drawable.ic_status_archived
