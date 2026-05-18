@@ -8,20 +8,22 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilMeetingName"
+        style="@style/TextInputLayout.Transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
-        app:boxStrokeWidth="0dp"
-        android:background="@color/main_dark_blue"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etMeetingName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/meeting_name"
+            android:background="@drawable/bg_rounded_input"
             android:textColor="@color/main_white"
-            android:textColorHint="@color/meeting_hint" />
+            android:textColorHint="@color/meeting_hint"
+            android:inputType="text"
+            android:imeOptions="actionDone"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -32,6 +34,10 @@
         android:text="@string/create_meeting"
         android:textColor="@color/main_dark"
         android:layout_marginTop="32dp"
+        app:icon="@drawable/ic_plus"
+        app:iconTint="@color/main_dark"
+        app:iconPadding="8dp"
+        app:iconGravity="textStart"
         android:textSize="16sp"
         android:fontFamily="@font/roboto_medium"
         android:backgroundTint="@color/main_white"

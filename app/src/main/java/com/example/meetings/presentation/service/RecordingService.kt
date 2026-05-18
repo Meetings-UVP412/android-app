@@ -99,9 +99,10 @@ class RecordingService : Service() {
 
         mediaRecorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
-            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+            setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+            setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
             setOutputFile(file.absolutePath)
+
             try {
                 prepare()
                 Log.d("RecordingService", "MediaRecorder prepared for: ${file.name}")
@@ -117,9 +118,8 @@ class RecordingService : Service() {
     }
 
     private fun getChunkFile(): File {
-        val dir = getExternalFilesDir(null) ?: throw IllegalStateException("No external files dir")
-        val timestamp = System.currentTimeMillis()
-        return File(dir, "meeting_${meetingId}_chunk_${chunkOrder}_${timestamp}.3gp")
+        val fileName = "meeting_${meetingId}_chunk_${chunkOrder}_${System.currentTimeMillis()}.mp4"
+        return File(getExternalFilesDir(null), fileName)
     }
 
     private fun sendChunk() {
