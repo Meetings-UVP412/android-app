@@ -6,6 +6,7 @@
     android:background="@color/main_dark">
 
     <LinearLayout
+        android:id="@+id/llTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -44,16 +45,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.3"/>
 
-    <View
+    <ImageView
         android:id="@+id/waveform"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="#333333"
+        android:layout_height="36dp"
+        android:src="@drawable/ic_wave"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/btnRecord"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnRecord"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="48dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llTimer" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnFinishMeeting"

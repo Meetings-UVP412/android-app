@@ -61,11 +61,16 @@ class CreateMeetingFragment : Fragment() {
     }
 
     private fun createMeeting() {
+        if (!binding.btnCreateMeeting.isEnabled) return
+
         val name = binding.etMeetingName.text.toString().trim()
         if (name.isEmpty()) {
             Toast.makeText(requireContext(), "Введите название встречи", Toast.LENGTH_SHORT).show()
             return
         }
+
+        binding.btnCreateMeeting.isEnabled = false
+        binding.btnCreateMeeting.alpha = 0.5f
 
         val request = MeetingCreateRequest(
             name = name,
@@ -90,6 +95,9 @@ class CreateMeetingFragment : Fragment() {
             } catch (e: Exception) {
                 Log.e("CreateMeeting", "Error creating meeting", e)
                 Toast.makeText(requireContext(), "Ошибка создания встречи", Toast.LENGTH_LONG).show()
+            } finally {
+                binding.btnCreateMeeting.isEnabled = true
+                binding.btnCreateMeeting.alpha = 1.0f
             }
         }
     }
