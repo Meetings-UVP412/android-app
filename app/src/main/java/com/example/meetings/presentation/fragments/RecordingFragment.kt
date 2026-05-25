@@ -47,8 +47,14 @@ class RecordingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         meetingId = requireArguments().getString("meetingId") ?: ""
         val meetingName = requireArguments().getString("meetingName") ?: "Встреча"
+        val participantsCount = requireArguments().getInt("participantsCount", 0)
+        val meetingDate = requireArguments().getString("meetingDate", "")
 
         requireActivity().findViewById<TextView>(R.id.toolbar_title)?.text = meetingName
+
+        binding.tvMeetingName.text = meetingName
+        binding.tvParticipants.text = "Участников: $participantsCount"
+        binding.tvMeetingDate.text = "Дата встречи: ${formatMeetingDate(meetingDate)}"
 
         setupButtons()
         recordingDot = binding.ivRecordingDot
@@ -193,5 +199,19 @@ class RecordingFragment : Fragment() {
     private fun updateRecordingDot() {
         val icon = if (isRecording) R.drawable.ic_dot_recording else R.drawable.ic_dot_idle
         recordingDot.setImageResource(icon)
+    }
+
+    private fun formatMeetingDate(dateString: String): String {
+        if (dateString.isEmpty()) return ""
+        return try {
+            val datePart = dateString.split('T')[0]
+            val timePart = dateString.split('T')[1].substringBefore('.')
+            val day = datePart.substring(8, 10)
+            val month = datePart.substring(5, 7)
+            val time = timePart.substring(0, 5)
+            "$day.$month $time"
+        } catch (e: Exception) {
+            dateString
+        }
     }
 }

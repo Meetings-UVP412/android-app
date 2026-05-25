@@ -89,7 +89,9 @@ class CreateMeetingFragment : Fragment() {
                 findNavController().navigate(
                     CreateMeetingFragmentDirections.actionToRecording(
                         meetingId = meeting.uuid,
-                        meetingName = meeting.name
+                        meetingName = meeting.name,
+                        participantsCount = meeting.users.size,
+                        meetingDate = meeting.createdAt
                     )
                 )
             } catch (e: Exception) {

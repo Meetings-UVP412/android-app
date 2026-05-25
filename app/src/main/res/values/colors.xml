@@ -15,4 +15,5 @@
     <color name="status_new">#0099FA</color>
     <color name="delete_icon">#FFDBDB</color>
     <color name="red_icon_delete">#FF4B49</color>
+    <color name="record_hint">#778B98</color>
 </resources>

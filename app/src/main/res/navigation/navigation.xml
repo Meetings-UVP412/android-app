@@ -76,7 +76,14 @@
         <argument
             android:name="meetingName"
             app:argType="string" />
-
+        <argument
+            android:name="participantsCount"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="meetingDate"
+            app:argType="string"
+            android:defaultValue="" />
     </fragment>
 
 </navigation>
