@@ -50,7 +50,8 @@ class RecordingFragment : Fragment() {
         val participantsCount = requireArguments().getInt("participantsCount", 0)
         val meetingDate = requireArguments().getString("meetingDate", "")
 
-        requireActivity().findViewById<TextView>(R.id.toolbar_title)?.text = meetingName
+        val toolbar = requireActivity().findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        toolbar?.visibility = View.GONE
 
         binding.tvMeetingName.text = meetingName
         binding.tvParticipants.text = "Участников: $participantsCount"
@@ -155,6 +156,10 @@ class RecordingFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+
+        val toolbar = requireActivity().findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        toolbar?.visibility = View.VISIBLE
+
         _binding = null
         timer?.cancel()
     }

@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp">
+        android:layout_marginTop="56dp">
 
         <TextView
             android:id="@+id/tvTimer"
@@ -38,46 +38,46 @@
         android:id="@+id/clMeetingDetails"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="19dp"
         android:background="@drawable/bg_meeting_details_rounded"
         android:padding="16dp"
-        android:layout_marginTop="156dp"
-        app:layout_constraintTop_toBottomOf="@id/llTimer"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="19dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvMeetingName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@color/main_white"
             android:fontFamily="@font/roboto_medium"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/main_white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvParticipants"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:layout_marginTop="4dp"
             android:textColor="@color/record_hint"
-            app:layout_constraintTop_toBottomOf="@id/tvMeetingName"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="4dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMeetingName" />
 
         <TextView
             android:id="@+id/tvMeetingDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:layout_marginTop="4dp"
             android:textColor="@color/record_hint"
-            app:layout_constraintTop_toBottomOf="@id/tvParticipants"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="4dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvParticipants" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
