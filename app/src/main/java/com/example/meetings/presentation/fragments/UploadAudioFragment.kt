@@ -22,7 +22,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.meetings.R
+import com.example.meetings.data.model.User
 import com.example.meetings.databinding.FragmentUploadAudioBinding
+import com.example.meetings.presentation.adapter.AllUserAdapter
+import com.example.meetings.presentation.adapter.SelectedUserAdapter
+import com.example.meetings.presentation.viewmodel.MeetingsViewModel
 import com.example.meetings.presentation.viewmodel.UploadAudioViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,6 +38,11 @@ import java.util.Locale
 
 class UploadAudioFragment : Fragment() {
     private lateinit var binding: FragmentUploadAudioBinding
+    private val selectedUsers = mutableListOf<User>()
+    private var allUsers: List<User> = emptyList()
+
+    private lateinit var allUserAdapter: AllUserAdapter
+    private lateinit var selectedUserAdapter: SelectedUserAdapter
 
     private val viewModel: UploadAudioViewModel by viewModels {
         object : ViewModelProvider.Factory {
@@ -88,6 +97,19 @@ class UploadAudioFragment : Fragment() {
 
         val toolbarTitle = requireActivity().findViewById<TextView>(R.id.toolbar_title)
         toolbarTitle.text = "Загрузить аудио встречи"
+
+        setupUserSelection()
+        loadUsers()
+
+        binding.rvAllUsers.setHasFixedSize(false)
+
+        binding.etSearchUser.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                filterUsers(s.toString())
+            }
+        })
     }
 
     private fun setupObservers() {
@@ -136,6 +158,57 @@ class UploadAudioFragment : Fragment() {
         }
     }
 
+    private fun setupUserSelection() {
+        selectedUserAdapter = SelectedUserAdapter()
+        binding.rvSelectedUsers.adapter = selectedUserAdapter
+
+        allUserAdapter = AllUserAdapter { user, isChecked ->
+            if (isChecked) {
+                if (!selectedUsers.contains(user)) {
+                    selectedUsers.add(user)
+                }
+            } else {
+                selectedUsers.remove(user)
+            }
+            selectedUserAdapter.submitList(selectedUsers.toList())
+            updateParticipantsCount()
+            allUserAdapter.updateSelectedIds(selectedUsers.map { it.id }.toSet())
+        }
+        binding.rvAllUsers.adapter = allUserAdapter
+    }
+
+    private fun loadUsers() {
+        lifecycleScope.launch {
+            try {
+                val meetingsViewModel = ViewModelProvider(this@UploadAudioFragment)[MeetingsViewModel::class.java]
+                allUsers = meetingsViewModel.getUsers()
+                allUserAdapter.submitList(allUsers)
+            } catch (e: Exception) {
+                Log.e("UploadAudio", "Error loading users", e)
+                Toast.makeText(requireContext(), "Ошибка загрузки пользователей", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun filterUsers(query: String) {
+        val searchQuery = query.lowercase().trim()
+        val listToFilter = allUsers
+        val filtered = if (searchQuery.isEmpty()) {
+            listToFilter
+        } else {
+            listToFilter.filter { user ->
+                user.firstName.lowercase().contains(searchQuery) ||
+                        user.lastName.lowercase().contains(searchQuery) ||
+                        user.patronymic.lowercase().contains(searchQuery)
+            }
+        }
+        allUserAdapter.submitList(filtered)
+    }
+
+    private fun updateParticipantsCount() {
+        binding.tvSelectedUsersTitle.text = getString(R.string.participant) + " (${selectedUsers.size})"
+    }
+
     private fun setupClickListeners() {
         binding.tvDateTime.setOnClickListener { showDateTimePicker() }
         binding.btnUploadAudio.setOnClickListener { openFilePicker() }
@@ -145,7 +218,11 @@ class UploadAudioFragment : Fragment() {
             if (!viewModel.isCreateButtonEnabled.value!!) {
                 Toast.makeText(requireContext(), "Заполните все обязательные поля", Toast.LENGTH_SHORT).show()
             } else {
-                viewModel.createMeeting()
+                if (selectedUsers.isEmpty()) {
+                    Toast.makeText(requireContext(), "Выберите хотя бы одного участника", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                viewModel.createMeeting(selectedUsers.map { it.id })
             }
         }
     }

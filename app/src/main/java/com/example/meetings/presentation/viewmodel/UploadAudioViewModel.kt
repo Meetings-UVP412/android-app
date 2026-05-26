@@ -4,8 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import android.net.Uri
 import android.util.Log
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -103,16 +101,16 @@ class UploadAudioViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
-    fun createMeeting() {
+    fun createMeeting(participantIds: List<Int>) {
         viewModelScope.launch {
             try {
                 val meeting = repository.createMeeting(
                     MeetingCreateRequest(
-                        name = _meetingName.value!!,
-                        users = emptyList(),
-                        authorId = 21,
-                        link = _link.value,
-                        comment = _comment.value
+                        name = _meetingName.value.orEmpty(),
+                        users = participantIds,
+                        authorId = 1,
+                        link = _link.value.orEmpty(),
+                        comment = _comment.value.orEmpty()
                     )
                 )
 

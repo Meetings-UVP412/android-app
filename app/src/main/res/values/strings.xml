@@ -42,6 +42,6 @@
     <string name="create_meeting">Создать встречу</string>
     <string name="search_users">Поиск участников</string>
     <string name="user">Владислав Анатольевич</string>
-    <string name="participant">Участники (0)</string>
+    <string name="participant">Участники</string>
     <string name="chats_not_found">Чатов пока нет</string>
 </resources>
