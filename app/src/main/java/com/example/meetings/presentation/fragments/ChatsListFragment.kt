@@ -41,7 +41,7 @@ class ChatsListFragment : Fragment() {
 
     private fun setupArguments() {
         val meetingId = arguments?.getString("meetingId") ?: ""
-        viewModel = ViewModelProvider(this, MeetingChatsViewModelFactory(meetingId)) [MeetingChatsViewModel::class.java]
+        viewModel = ViewModelProvider(this, MeetingChatsViewModelFactory(meetingId))[MeetingChatsViewModel::class.java]
     }
 
     private fun setupRecyclerView() {
@@ -61,10 +61,23 @@ class ChatsListFragment : Fragment() {
     private fun setupViewModel() {
         viewModel.chats.observe(viewLifecycleOwner) { chats ->
             chatsAdapter.submitList(chats)
+            updateEmptyState(chats.isEmpty())
         }
 
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun updateEmptyState(isEmpty: Boolean) {
+        if (isEmpty) {
+            binding.rvChats.visibility = View.GONE
+            binding.ivNoChatsIcon.visibility = View.VISIBLE
+            binding.tvNoChats.visibility = View.VISIBLE
+        } else {
+            binding.rvChats.visibility = View.VISIBLE
+            binding.ivNoChatsIcon.visibility = View.GONE
+            binding.tvNoChats.visibility = View.GONE
         }
     }
 

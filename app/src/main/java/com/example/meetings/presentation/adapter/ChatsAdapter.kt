@@ -40,7 +40,7 @@ class ChatsAdapter(
             val createdAt = try {
                 val date = inputFormat.parse(chat.createdAt)
                 if (date != null) outputFormat.format(date) else chat.createdAt
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 chat.createdAt
             }
             binding.tvChatTime.text = createdAt
