@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_dark"
-    android:padding="24dp">
+    android:paddingHorizontal="16dp"
+    android:paddingBottom="16dp">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilMeetingName"
@@ -90,6 +91,7 @@
         android:id="@+id/btnCreateMeeting"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:layout_marginBottom="15dp"
         android:backgroundTint="@color/main_white"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/create_meeting"
