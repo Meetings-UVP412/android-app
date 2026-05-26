@@ -75,36 +75,45 @@ class MeetingDetailsFragment : Fragment() {
 
             binding.tvParticipantsTitle.text = "Участники (${meeting.users.size})"
 
+            val statusContainer = binding.clStatusContainer
+            val statusTextView = binding.tvStatus
+            val statusIconView = binding.ivStatusIcon
+
             when (meeting.status.lowercase()) {
                 "processed" -> {
-                    binding.tvStatus.setText(R.string.meeting_processed)
-                    binding.tvStatus.backgroundTintList = ColorStateList.valueOf(
+                    statusTextView.setText(R.string.meeting_processed)
+                    statusContainer.backgroundTintList = ColorStateList.valueOf(
                         ContextCompat.getColor(requireContext(), R.color.status_processed)
                     )
+                    statusIconView.setImageResource(R.drawable.ic_status_processed)
                 }
                 "archived" -> {
-                    binding.tvStatus.setText(R.string.meeting_archived)
-                    binding.tvStatus.backgroundTintList = ColorStateList.valueOf(
+                    statusTextView.setText(R.string.meeting_archived)
+                    statusContainer.backgroundTintList = ColorStateList.valueOf(
                         ContextCompat.getColor(requireContext(), R.color.status_archived)
                     )
+                    statusIconView.setImageResource(R.drawable.ic_status_archived)
                 }
                 "end" -> {
-                    binding.tvStatus.setText(R.string.meeting_end)
-                    binding.tvStatus.backgroundTintList = ColorStateList.valueOf(
+                    statusTextView.setText(R.string.meeting_end)
+                    statusContainer.backgroundTintList = ColorStateList.valueOf(
                         ContextCompat.getColor(requireContext(), R.color.status_end)
                     )
+                    statusIconView.setImageResource(R.drawable.ic_status_end)
                 }
                 "new" -> {
-                    binding.tvStatus.setText(R.string.meeting_new)
-                    binding.tvStatus.backgroundTintList = ColorStateList.valueOf(
+                    statusTextView.setText(R.string.meeting_new)
+                    statusContainer.backgroundTintList = ColorStateList.valueOf(
                         ContextCompat.getColor(requireContext(), R.color.status_new)
                     )
+                    statusIconView.setImageResource(R.drawable.ic_status_new)
                 }
                 else -> {
-                    binding.tvStatus.text = meeting.status.replaceFirstChar { it.uppercase() }
-                    binding.tvStatus.backgroundTintList = ColorStateList.valueOf(
+                    statusTextView.text = meeting.status.replaceFirstChar { it.uppercase() }
+                    statusContainer.backgroundTintList = ColorStateList.valueOf(
                         ContextCompat.getColor(requireContext(), R.color.status_archived)
                     )
+                    statusIconView.setImageResource(R.drawable.ic_status_archived)
                 }
             }
 
