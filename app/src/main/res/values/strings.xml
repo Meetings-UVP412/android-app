@@ -40,4 +40,7 @@
     <string name="time_date_meeting">Дата и время встречи *</string>
     <string name="end_meeting">Завершить встречу</string>
     <string name="create_meeting">Создать встречу</string>
+    <string name="search_users">Поиск участников</string>
+    <string name="user">Владислав Анатольевич</string>
+    <string name="participant">Участники (0)</string>
 </resources>

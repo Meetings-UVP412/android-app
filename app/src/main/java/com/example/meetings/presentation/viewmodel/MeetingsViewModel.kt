@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meetings.data.model.Meeting
+import com.example.meetings.data.model.User
 import com.example.meetings.data.repository.MeetingRepository
 import com.example.meetings.network.MeetingCreateRequest
 import kotlinx.coroutines.launch
@@ -42,5 +43,9 @@ class MeetingsViewModel : ViewModel() {
 
     suspend fun createMeeting(request: MeetingCreateRequest): Meeting {
         return repository.createMeeting(request)
+    }
+
+    suspend fun getUsers(): List<User> {
+        return repository.getUsers()
     }
 }

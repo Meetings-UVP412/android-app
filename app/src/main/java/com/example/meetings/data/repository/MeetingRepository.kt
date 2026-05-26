@@ -7,18 +7,20 @@ import android.util.Log
 import com.example.meetings.data.model.Chat
 import com.example.meetings.data.model.Meeting
 import com.example.meetings.data.model.SendMessageRequest
+import com.example.meetings.data.model.User
 import com.example.meetings.network.MeetingApi
 import com.example.meetings.network.MeetingCreateRequest
 import com.example.meetings.network.SseClient
-import okhttp3.Call
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.Call
 import java.io.File
 
 class MeetingRepository {
 
     private val sseClient = SseClient(MeetingApi.BASE_URL)
+
     suspend fun fetchMeetings(): List<Meeting> {
         return MeetingApi.service.getMeetings()
     }
@@ -44,7 +46,6 @@ class MeetingRepository {
         return sseClient.sendAndStream(request, onChunkReceived, onError, onComplete)
     }
 
-
     suspend fun createMeeting(request: MeetingCreateRequest): Meeting {
         return try {
             val response = MeetingApi.service.createMeeting(request)
@@ -52,6 +53,15 @@ class MeetingRepository {
             response
         } catch (e: Exception) {
             Log.e("Network", "Create meeting error", e)
+            throw e
+        }
+    }
+
+    suspend fun getUsers(): List<User> {
+        return try {
+            MeetingApi.service.getUsers()
+        } catch (e: Exception) {
+            Log.e("Network", "Get users error", e)
             throw e
         }
     }

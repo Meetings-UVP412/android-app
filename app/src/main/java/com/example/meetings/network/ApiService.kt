@@ -3,6 +3,7 @@ package com.example.meetings.network
 import com.example.meetings.data.model.Chat
 import com.example.meetings.data.model.Meeting
 import com.example.meetings.data.model.SendMessageRequest
+import com.example.meetings.data.model.User
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -37,6 +38,9 @@ interface ApiService {
     @POST("api/meetings/create")
     @Headers("Content-Type: application/json")
     suspend fun createMeeting(@Body request: MeetingCreateRequest): Meeting
+
+    @GET("users/all")
+    suspend fun getUsers(): List<User>
 
     @Multipart
     @POST("api/meetings/uploadFile")

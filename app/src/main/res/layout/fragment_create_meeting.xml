@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_dark"
@@ -11,37 +12,94 @@
         style="@style/TextInputLayout.Transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etMeetingName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/meeting_name"
             android:background="@drawable/bg_rounded_input"
-            android:textColor="@color/main_white"
-            android:textColorHint="@color/meeting_hint"
+            android:hint="@string/meeting_name"
+            android:imeOptions="actionDone"
             android:inputType="text"
-            android:imeOptions="actionDone"/>
+            android:textColor="@color/main_white"
+            android:textColorHint="@color/meeting_hint" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvSelectedUsersTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/participant"
+        android:textColor="@color/hint_input"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilMeetingName" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSelectedUsers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectedUsersTitle"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_meeting_participant" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilSearchUser"
+        style="@style/TextInputLayout.Transparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/rvSelectedUsers"
+        app:startIconDrawable="@drawable/ic_search_participants"
+        app:startIconTint="@color/meeting_hint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSearchUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_input"
+            android:hint="@string/search_users"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textColor="@color/main_white"
+            android:textColorHint="@color/meeting_hint" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAllUsers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/btnCreateMeeting"
+        app:layout_constraintTop_toBottomOf="@id/tilSearchUser"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_user" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCreateMeeting"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:backgroundTint="@color/main_white"
+        android:fontFamily="@font/roboto_medium"
         android:text="@string/create_meeting"
         android:textColor="@color/main_dark"
-        android:layout_marginTop="32dp"
-        app:icon="@drawable/ic_plus"
-        app:iconTint="@color/main_dark"
-        app:iconPadding="8dp"
-        app:iconGravity="textStart"
         android:textSize="16sp"
-        android:fontFamily="@font/roboto_medium"
-        android:backgroundTint="@color/main_white"
-        app:layout_constraintTop_toBottomOf="@id/tilMeetingName"
-        app:cornerRadius="12dp" />
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_plus"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:iconTint="@color/main_dark"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
